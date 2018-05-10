@@ -15,8 +15,13 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/addProperty', 'SampleController@property')->name('home');
 
-Route::view('/addProperty', 'property');
+// Route::get('/addProperty', function () {
+//     return view('property');
+// });
