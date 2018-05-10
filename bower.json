@@ -1,0 +1,22 @@
+{
+  "name": "bower",
+  "description": "this is the projects dependency handler",
+  "main": "index.html",
+  "authors": [
+    "Lee <castillolee@yahoo.com>"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^3.3.1"
+  }
+}
