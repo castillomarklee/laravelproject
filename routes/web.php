@@ -20,7 +20,11 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/addProperty', 'SampleController@property')->name('home');
+
+//Property Routes
+// Route::get('/property', 'PropertyController@propertyView')->name('property');
+Route::resource('property', 'PropertiesController');
+
 
 // Route::get('/addProperty', function () {
 //     return view('property');

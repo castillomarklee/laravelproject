@@ -11,16 +11,17 @@
     <title>{{ config('app.name', 'Admin') }}</title>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{ asset('/public/js/app.js') }}" defer></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,600" rel="stylesheet" type="text/css">
-
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
     <!-- Styles -->
-    
-    <link href="{{ asset('public/css/app.css') }}" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="{{ asset('public/downloaded_libraries/bootstrap-3.3.7-dist/css/bootstrap.min.css') }}">
+    <!-- <link href="{{ asset('public/css/app.css') }}" rel="stylesheet"> -->
+    <link href="{{ asset('public/css/custom.css') }}" rel="stylesheet">
+    
 
 </head>
 <body>
@@ -51,23 +52,23 @@
           <div class="container-fluid">
             <div class="navbar-header">
                @guest
-                <a class="navbar-brand" href="{{ url('/') }}">
+                <a class="navbar-brand" href="{{ url('/') }}" style="font-size: 25px; padding-left: 200px;">
                     {{ config('app.name', 'Admin') }}
                 </a>
                 @else
-                <a class="navbar-brand" href="{{ url('/') }}">
+                <a class="navbar-brand" href="{{ url('/home') }}" style="font-size: 25px; padding-left: 200px;">
                     Hello Admin! Welcome.
                 </a>
                 @endguest
             </div>
 
             <ul class="nav navbar-nav navbar-right">
-               @guest
+                        @guest
                             <li><a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a></li>
                             <li><a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a></li>
                         @else
-                            <!-- <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                           <!--  <li class="nav-item dropdown">
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }} <span class="caret"></span>
                                 </a>
 
@@ -76,16 +77,18 @@
                                 </div>
                             </li> -->
 
-                            <li class="dropdown">
-                                <a class="dropdown-toggle" data-toggle="dropdown" href="#">Page 1</a>
-                                <ul class="dropdown-menu">
-                                  <li><a href="#">Page 1-1</a></li>
-                                  <li><a href="#">Page 1-2</a></li>
-                                  <li><a href="#">Page 1-3</a></li>
-                                </ul>
-                              </li>
+<!-- <li class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Page 1
+        <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li><a href="#">Page 1-1</a></li>
+          <li><a href="#">Page 1-2</a></li>
+          <li><a href="#">Page 1-3</a></li>
+        </ul>
+      </li> -->
 
-                            <!-- <li class="nav navbar-nav navbar-right" style="padding-left: 800px;">
+                            <li class="nav navbar-nav navbar-right" style="padding-right: 100px;">
+
                                  <a class="nav-link" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
@@ -95,7 +98,8 @@
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                         @csrf
                                     </form>
-                            </li> -->
+                            </li>
+                            <li><button class="btn btn-danger btn-md" style="margin-top: 5px;" onclick="window.location='{{ url("/property") }}'">Property</button></li>
                         @endguest
             </ul>
           </div>
@@ -107,6 +111,7 @@
     </div>
     <script type="text/javascript" src="{{ asset('public/bower_components/jquery/dist/jquery.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('public/downloaded_libraries/bootstrap-3.3.7-dist/js/bootstrap.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('public/js/fontawesome-all.js') }}"></script>
     <script type="text/javascript" src="{{ asset('public/js/moment.js') }}"></script>
 </body>
 </html>
