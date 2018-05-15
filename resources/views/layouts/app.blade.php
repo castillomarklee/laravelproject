@@ -57,7 +57,7 @@
                 </a>
                 @else
                 <a class="navbar-brand" href="{{ url('/home') }}" style="font-size: 25px; padding-left: 200px;">
-                    Hello Admin! Welcome.
+                    Admin
                 </a>
                 @endguest
             </div>
@@ -109,6 +109,7 @@
             @yield('content')
         </main>
     </div>
+    
     <script type="text/javascript" src="{{ asset('public/bower_components/jquery/dist/jquery.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('public/downloaded_libraries/bootstrap-3.3.7-dist/js/bootstrap.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('public/js/fontawesome-all.js') }}"></script>

@@ -10,17 +10,16 @@
 	 			<br><br><br><br>
 	 			<div class="row">
 	 				<div class="col-md-8 col-md-offset-2">
-	 					@if($errors->any())
-
-	 					<div class="alert alert-danger">
-	 						<ul>
-	 							@foreach($erros as $error)
-	 								<li>{{ $error }}</li>
-	 							@endforeach
-	 						</ul>
-	 					</div>
-
-	 					@endif()
+	 					
+	 					@if ($errors->any())
+						    <div class="alert alert-danger">
+						        <ul>
+						            @foreach ($errors->all() as $error)
+						                <li>{{ $error }}</li>
+						            @endforeach
+						        </ul>
+						    </div>
+						@endif
 
 	 					<br>
 
@@ -42,9 +41,9 @@
 	 							<div class="col-md-10">
 	 								<select class="form-control" name="facebook">
 	 									<option>Set Number</option>
-								        <option>1</option>
-								        <option>2</option>
-								        <option>3</option>
+								        <option value="1">1</option>
+								        <option value="2">2</option>
+								        <option value="3">3</option>
 								    </select>
 	 							</div>
 	 						</div>
@@ -55,9 +54,9 @@
 	 							<div class="col-md-10">
 	 								<select class="form-control" name="twitter">
 	 									<option>Set Number</option>
-								        <option>1</option>
-								        <option>2</option>
-								        <option>3</option>
+								        <option value="1">1</option>
+								        <option value="2">2</option>
+								        <option value="3">3</option>
 								    </select>
 	 							</div>
 	 						</div>
@@ -66,11 +65,11 @@
 	 								<h4>Instagram: </h4> 
 	 							</div>
 	 							<div class="col-md-10">
-	 								<select class="form-control" name="Instagram">
+	 								<select class="form-control" name="instagram">
 	 									<option>Set Number</option>
-								        <option>1</option>
-								        <option>2</option>
-								        <option>3</option>
+								        <option value="1">1</option>
+								        <option value="2">2</option>
+								        <option value="3">3</option>
 								    </select>
 	 							</div>
 	 						</div><br>
