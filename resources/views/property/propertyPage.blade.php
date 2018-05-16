@@ -2,10 +2,9 @@
 
 <!-- Scripts -->
 <script type="text/javascript" src="{{ asset('public/bower_components/jquery/dist/jquery.min.js') }}"></script>
-
 <script type="text/javascript">
-	
-
+	var baseURL = "{{ url('/')}}";
+	var GlobalID ="";
 		function getPropertiesDetails(uid) {
 			
 				$.get("property/" + uid , function(data) {
@@ -17,17 +16,47 @@
 					$('#clientEmail').html("<b>"+"Client Email: " + "</b>" + data[0].clientemail);
 					$('#propertyAddess').html("<b>"+"Property Address: " + "</b>" + data[0].propertyaddress);
 					$('#createdAt').html("<b>"+"Created At: " + "</b>" + data[0].created_at);
+					$('#propertyId').val(data[0].uid);
+					GlobalID = data[0].uid;
 				});
 
 		}
-		
 
+		
+		function editProperty() {
+			window.location.href =baseURL+"/property/edit/"+GlobalID;	
+		}
+
+		function deleteProperty() {
+			// $.post(baseURL+ "/property/delete/" + GlobalID, function(data) {
+			// 	console.log(data);
+			// });
+			$.ajax({
+			    type: "POST",
+			    url: baseURL+ "/property/delete/" + GlobalID,
+			    data: { somefield: "Some field value", _token: '{{csrf_token()}}' },
+			    success: function (data) {
+			       if(data == 1) {
+			       		location.reload();
+			       } else {
+			       	location.reload();
+			       }
+			    },
+			    error: function (data, textStatus, errorThrown) {
+			        if(data == 1) {
+			       		location.reload();
+			       } else {
+			       	location.reload();
+			       }
+			    },
+			});
+		}
 	
 </script>
 
 @section('content')
 <div class="container">
-	
+	<meta name="csrf-token" content="{{ csrf_token() }}">
 	 <div class="panel panel-default">
 	 	<div class="panel-heading" style="font-size: 20px;"><i class="fa fa-box"></i>  Property</div>
 	 	<div class="panel-body">
@@ -83,7 +112,9 @@
 
       	<div class="row" style="padding-top: 10px;">
       		
-      		<div class="col-xs-8 col-xs-offset-1">
+      		<div class="col-xs-10 col-xs-offset-1">
+      				
+      			<input type="hidden" id="propertyId">
       			<h5 id="listingName" style="font-size: 18px;"></h5>
       			<h5 id="agentName" style="font-size: 18px;"></h5>
       			<h5 id="propertyAddess" style="font-size: 18px;"></h5>
@@ -97,7 +128,9 @@
       </div>
 
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      	<button type="button"  class="btn btn-primary"  onclick="editProperty()">Edit</button>
+      	<button type="button" class="btn btn-danger" onclick="deleteProperty()">Delete</button>
+        <button type="button" class="btn btn-success" data-dismiss="modal">Close</button>
       </div>
     </div>
 

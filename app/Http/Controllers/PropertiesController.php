@@ -9,6 +9,16 @@ use DB;
 class PropertiesController extends Controller
 {
     /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -115,9 +125,10 @@ class PropertiesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($uid)
     {
-        //
+        $property = DB::table('property')->where('uid')->get();
+        return $property;
     }
 
     /**
@@ -129,7 +140,7 @@ class PropertiesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        return $request;
     }
 
     /**
@@ -142,4 +153,49 @@ class PropertiesController extends Controller
     {
         //
     }
+
+    public function editForm($uid) {
+        $data = DB::table('properties')->where('uid', $uid)->get();
+        return view('property.propertyEdit')->with(['propertiesData'=>  $data ]);
+    }
+
+    public function editSubmit(Request $request, $id) {
+
+        $validator = $request->validate([
+            'listingName' => 'required',
+            'agent' => 'required',
+            'agentEmail' => 'required|email',
+            'clientEmail' => 'required|email',
+            'propertyAddress' => 'required',
+            'facebook' => 'required | numeric',
+            'twitter' => 'required | numeric',
+            'instagram' => 'required | numeric',
+        ]);
+
+
+
+       $updateProperties = DB::table('properties')
+            ->where('id', $id)
+            ->update(['listingname' => $request->input('listingName'), 'agent' => $request->input('agent'), 'agentemail' => $request->input('agentEmail'), 'clientemail' => $request->input('clientEmail'), 'propertyaddress' => $request->input('propertyAddress'), 'facebook' => $request->input('facebook'), 'twitter' => $request->input('twitter'), 'instagram' => $request->input('instagram')]);
+
+        $updatePropertiesMessage = '';
+
+        $data = DB::table('properties')->where('id', $id)->get();
+
+        if($updateProperties == 1) {
+            $updatePropertiesMessage = view('property.propertyFormStatus')->with(['message' => 'Property has been updated']);
+        } else {
+            $updatePropertiesMessage = view('property.propertyFormStatus')->with(['message' => 'Property has not been updated']);
+        }
+ 
+        return $updatePropertiesMessage;
+
+    }
+
+    public function deleteProperties(Request $request, $id) {
+        $deleteProperty = DB::table('properties')->where('uid', $id)->delete();
+
+        return $deleteProperty;
+    }
+
 }
