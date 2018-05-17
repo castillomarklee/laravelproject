@@ -11,16 +11,17 @@
     <title>{{ config('app.name', 'Admin') }}</title>
 
     <!-- Scripts -->
-    <script src="{{ asset('/public/js/app.js') }}" defer></script>
 
     <!-- Fonts -->
-    <link rel="dns-prefetch" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,600" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
     <!-- Styles -->
     <link rel="stylesheet" type="text/css" href="{{ asset('public/downloaded_libraries/bootstrap-3.3.7-dist/css/bootstrap.min.css') }}">
-    <!-- <link href="{{ asset('public/css/app.css') }}" rel="stylesheet"> -->
+    <link rel="stylesheet" type="text/css" href="{{ asset('public/bower_components/DataTables/DataTables-1.10.16/css/dataTables.bootstrap.min.css') }}">
+
+    <link rel="stylesheet" type="text/css" href="{{ asset('https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.2.7/fullcalendar.min.css') }}">
+
     <link href="{{ asset('public/css/custom.css') }}" rel="stylesheet">
+
+    
     
 
 </head>
@@ -64,8 +65,8 @@
 
             <ul class="nav navbar-nav navbar-right">
                         @guest
-                            <li><a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a></li>
-                            <li><a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a></li>
+                        <!--     <li><a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a></li>
+                            <li><a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a></li> -->
                         @else
                            <!--  <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -104,15 +105,18 @@
             </ul>
           </div>
         </nav>
-
         <main class="py-4">
             @yield('content')
         </main>
     </div>
-    
+
     <script type="text/javascript" src="{{ asset('public/bower_components/jquery/dist/jquery.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('public/bower_components/DataTables/DataTables-1.10.16/js/jquery.dataTables.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('public/downloaded_libraries/bootstrap-3.3.7-dist/js/bootstrap.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('public/js/fontawesome-all.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('public/bower_components/DataTables/DataTables-1.10.16/js/dataTables.bootstrap.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('public/js/fontawesome-all.js') }}"></script>  
     <script type="text/javascript" src="{{ asset('public/js/moment.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.2.7/fullcalendar.min.js') }}"></script>
+    
 </body>
 </html>

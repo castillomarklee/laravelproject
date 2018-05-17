@@ -119,15 +119,15 @@
                                 
                          
 
-                        <div class="col-md-8 col-md-offset-3">
+                        <div class="col-md-8 col-md-offset-4">
                             
                             
-                                <button type="submit" class="btn btn-primary" style="font-size: 15px;">
+                                <button type="submit" class="btn btn-primary" style="font-size: 15px; width: 100px;">
                                     {{ __('Login') }}
                                 </button>
 
                                 <a class="btn btn-link" href="{{ route('password.request') }}" style="font-size: 15px;">
-                                    {{ __('Forgot Your Password?') }}
+                                   <!--  {{ __('Forgot Your Password?') }} -->
                                 </a>
                            
                         

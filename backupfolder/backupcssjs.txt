@@ -1,0 +1,107 @@
+    <!-- Scripts -->
+    <script src="{{ asset('/public/js/app.js') }}" defer></script>
+
+    <!-- Fonts -->
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,600" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+    <!-- Styles -->
+    <link rel="stylesheet" type="text/css" href="{{ asset('public/downloaded_libraries/bootstrap-3.3.7-dist/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('https://cdn.datatables.net/1.10.16/css/jquery.dataTables.css') }}">
+    <!-- <link href="{{ asset('public/css/app.css') }}" rel="stylesheet"> -->
+    <link href="{{ asset('public/css/custom.css') }}" rel="stylesheet">
+
+    <script type="text/javascript" src="{{ asset('public/bower_components/jquery/dist/jquery.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('public/downloaded_libraries/bootstrap-3.3.7-dist/js/bootstrap.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('public/js/fontawesome-all.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('https://cdn.datatables.net/1.10.16/js/jquery.dataTables.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('public/js/moment.js') }}"></script>
+
+
+
+
+
+    <h3><a id="asdsad" style="cursor: pointer;" data-toggle="modal" data-target="#propertyDetails" onclick="getPropertiesDetails('{{ $property->uid }}')">{{$property->listingname}}</a></h3>
+                                    <small><b>Created at: </b>{{$property->created_at}}</small>
+
+
+
+
+
+
+    <?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use DB;
+use Calendar;
+
+// use App\User;
+
+class HomeController extends Controller
+{
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+
+        $schedules = DB::table('properties')
+            ->join('propertydate', 'properties.uid', '=', 'propertydate.property_uid')
+            ->select('properties.*', 'propertydate.*')
+            ->get();
+        
+        $event_list = [];
+
+        foreach ($schedules as $key => $schedule) {
+            $event_list[] = Calendar::event(
+
+                $schedule->social_medianame,
+                true,
+                new \DateTime($schedule->start_date),
+                new \DateTime($schedule->end_date)
+            );
+
+            $calendar_details = Calendar::addEvents($event_list);
+        }
+
+        return view('home', compact('calendar_details'))->with(['schedules' => $schedules]);
+    }
+
+    
+
+}
+
+
+
+
+@if(count($schedules) > 0)
+
+                {!! $calendar_details->calendar() !!}
+
+            @else
+
+                <h1>There are no Properties</h1>
+
+            @endif
+
+
+
+                <script>
+        @yield('pageScript')
+    </script>
+    {!! $calendar_details->script() !!}

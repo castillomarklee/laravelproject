@@ -51,6 +51,13 @@
 			    },
 			});
 		}
+
+		$(document).ready(function() {
+		    $('#propertyTable').DataTable({
+		    	"lengthChange": false,
+	            "pageLength": 10
+		    });
+		} );
 	
 </script>
 
@@ -71,26 +78,47 @@
 
 	 					@if(count($properties) > 0)
 
-	 						@foreach($properties as $property)
+	 						
 
 	 							<div class="well">
-	 								<h3><a id="asdsad" style="cursor: pointer;" data-toggle="modal" data-target="#propertyDetails" onclick="getPropertiesDetails('{{ $property->uid }}')">{{$property->listingname}}</a></h3>
-	 								<small><b>Created at: </b>{{$property->created_at}}</small>
+	 								
+	 								<div class="table-responsive">          
+									  <table class="table" id="propertyTable">
+									    <thead>
+									      <tr>
+									        <th>Listing Name</th>
+									        <th>Agent</th>
+									        <th>Date Created</th>
+									      </tr>
+									    </thead>
+									    <tbody>
+									    	@foreach($properties as $property)
+										      <tr>
+										         <td><a id="asdsad" style="cursor: pointer;" data-toggle="modal" data-target="#propertyDetails" onclick="getPropertiesDetails('{{ $property->uid }}')">{{ $property->listingname }}</a></td>
+										         <td>{{ $property->agent }}</td>
+										         <td>{{ $property->created_at }}</td>
+										      </tr>
+										    @endforeach
+									    </tbody>
+									  </table>
+									  </div>
 	 							</div>
 
-	 						@endforeach
+	 						
 
 	 						<div class="col-md-offset-4">{{ $properties->links() }}</div>
 
 	 					@else
 
-	 						<h3>No Properties</h3>
+	 						<div class="well">
+	 							<h3>No Properties</h3>
+	 						</div>
 
 	 					@endif
 
 	 					<br><br>
 
-	 					
+	 			
 
 	 				</div>
 	 			</div>
@@ -138,5 +166,7 @@
 </div>
 
 </div>
+
+
  
 @endsection

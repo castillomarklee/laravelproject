@@ -79,7 +79,7 @@ class PropertiesController extends Controller
         $twitter = $request->input('twitter');
         $instagram = $request->input('instagram');
 
-        $data = ['uid' => $uid,
+        $properties = ['uid' => $uid,
         'listingname' => $listingname,
         'agent' =>$agent,
         'agentemail'=> $agentemail,        
@@ -91,7 +91,41 @@ class PropertiesController extends Controller
         'created_at' => new \DateTime(),
         'updated_at' => new \DateTime()];
 
-        $saveProperty = DB::table('properties')->insert($data);
+        $saveProperty = DB::table('properties')->insert($properties);
+
+        $propertydateFacebook = [
+            'property_uid' => $uid,
+            'social_media' => $facebook,
+            'start_date' => date('Y-m-d'),
+            'end_date' => Date('Y-m-d', strtotime("+". $facebook ." days")),
+            'schedule_uid' => 'SCHEDULE-' . '-' . rand(1, 10000) . '-' . date('m-d-Y'),
+            'date_created' => date('Y-m-d'),
+            'social_medianame' => 'facebook'
+        ];
+
+        $propertydateTwitter = [
+            'property_uid' => $uid,
+            'social_media' => $twitter,
+            'start_date' => date('Y-m-d'),
+            'end_date' => Date('Y-m-d', strtotime("+". $twitter ." days")),
+            'schedule_uid' => 'SCHEDULE-' . '-' . rand(1, 10000) . '-' . date('m-d-Y'),
+            'date_created' => date('Y-m-d'),
+            'social_medianame' => 'twitter'
+        ];
+
+        $propertydateInstagram = [
+            'property_uid' => $uid,
+            'social_media' => $instagram,
+            'start_date' => date('Y-m-d'),
+            'end_date' => Date('Y-m-d', strtotime("+". $instagram ." days")),
+            'schedule_uid' => 'SCHEDULE-' . '-' . rand(1, 10000) . '-' . date('m-d-Y'),
+            'date_created' => date('Y-m-d'),
+            'social_medianame' => 'instagram'
+        ];
+
+        $saveFacebook = DB::table('propertydate')->insert($propertydateFacebook);
+        $saveTwitter = DB::table('propertydate')->insert($propertydateTwitter);
+        $saveInstagram = DB::table('propertydate')->insert($propertydateInstagram);
 
         $savePropertyMessage = '';
         
@@ -176,7 +210,49 @@ class PropertiesController extends Controller
 
        $updateProperties = DB::table('properties')
             ->where('id', $id)
-            ->update(['listingname' => $request->input('listingName'), 'agent' => $request->input('agent'), 'agentemail' => $request->input('agentEmail'), 'clientemail' => $request->input('clientEmail'), 'propertyaddress' => $request->input('propertyAddress'), 'facebook' => $request->input('facebook'), 'twitter' => $request->input('twitter'), 'instagram' => $request->input('instagram')]);
+            ->update(['listingname' => $request->input('listingName'), 'agent' => $request->input('agent'), 'agentemail' => $request->input('agentEmail'), 'clientemail' => $request->input('clientEmail'), 'propertyaddress' => $request->input('propertyAddress'), 'facebook' => $request->input('facebook'), 'twitter' => $request->input('twitter'), 'instagram' => $request->input('instagram'), 'updated_at' => new \DateTime()]);
+
+        $getUid = DB::table('properties')
+            ->join('propertydate', 'properties.uid', '=', 'propertydate.property_uid')
+            ->select('properties.*', 'propertydate.*')
+            ->where('id', $id)
+            ->get();
+
+        $facebookUpdate = DB::table('propertydate')
+            ->where([
+
+                ['property_uid', '=', $getUid[0]->uid],
+                ['social_medianame', '=', 'facebook']
+
+            ])
+            ->update([
+                'social_media' => $request->input('facebook'),
+                'end_date' => date('Y-m-d', strtotime( $getUid[0]->start_date . ' +' . $request->input('facebook') . ' day'))
+            ]);
+
+            $twitterUpdate = DB::table('propertydate')
+            ->where([
+
+                ['property_uid', '=', $getUid[0]->uid],
+                ['social_medianame', '=', 'twitter']
+
+            ])
+            ->update([
+                'social_media' => $request->input('twitter'),
+                'end_date' => date('Y-m-d', strtotime( $getUid[0]->start_date . ' +' . $request->input('twitter') . ' day'))
+            ]);
+
+            $instagramUpdate = DB::table('propertydate')
+            ->where([
+
+                ['property_uid', '=', $getUid[0]->uid],
+                ['social_medianame', '=', 'instagram']
+
+            ])
+            ->update([
+                'social_media' => $request->input('instagram'),
+                'end_date' => date('Y-m-d', strtotime( $getUid[0]->start_date . ' +' . $request->input('instagram') . ' day'))
+            ]);
 
         $updatePropertiesMessage = '';
 
