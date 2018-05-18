@@ -22,7 +22,6 @@
 
 		}
 
-		
 		function editProperty() {
 			window.location.href =baseURL+"/property/edit/"+GlobalID;	
 		}

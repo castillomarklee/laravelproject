@@ -16,12 +16,16 @@
     <!-- Styles -->
     <link rel="stylesheet" type="text/css" href="{{ asset('public/downloaded_libraries/bootstrap-3.3.7-dist/css/bootstrap.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('public/bower_components/DataTables/DataTables-1.10.16/css/dataTables.bootstrap.min.css') }}">
-
-    <link rel="stylesheet" type="text/css" href="{{ asset('https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.2.7/fullcalendar.min.css') }}">
-
+    <link rel="stylesheet" type="text/css" href="{{ asset('public/bower_components/fullcalendar-3.9.0/fullcalendar.css') }}">
     <link href="{{ asset('public/css/custom.css') }}" rel="stylesheet">
 
-    
+    <script type="text/javascript" src="{{ asset('public/bower_components/jquery/dist/jquery.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('public/bower_components/DataTables/DataTables-1.10.16/js/jquery.dataTables.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('public/downloaded_libraries/bootstrap-3.3.7-dist/js/bootstrap.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('public/bower_components/DataTables/DataTables-1.10.16/js/dataTables.bootstrap.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('public/js/fontawesome-all.js') }}"></script>  
+    <script type="text/javascript" src="{{ asset('public/js/moment.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('public/bower_components/fullcalendar-3.9.0/fullcalendar.js') }}"></script>
     
 
 </head>
@@ -110,13 +114,5 @@
         </main>
     </div>
 
-    <script type="text/javascript" src="{{ asset('public/bower_components/jquery/dist/jquery.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('public/bower_components/DataTables/DataTables-1.10.16/js/jquery.dataTables.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('public/downloaded_libraries/bootstrap-3.3.7-dist/js/bootstrap.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('public/bower_components/DataTables/DataTables-1.10.16/js/dataTables.bootstrap.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('public/js/fontawesome-all.js') }}"></script>  
-    <script type="text/javascript" src="{{ asset('public/js/moment.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.2.7/fullcalendar.min.js') }}"></script>
-    
 </body>
 </html>

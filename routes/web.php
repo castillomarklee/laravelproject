@@ -27,6 +27,7 @@ Route::resource('property', 'PropertiesController');
 Route::get('/property/edit/{id}', 'PropertiesController@editForm');
 Route::post('/property/editSubmit/{id}', 'PropertiesController@editSubmit');
 Route::post('/property/delete/{id}', 'PropertiesController@deleteProperties');
+Route::get('/calendar/getDate', 'HomeController@getPropertiesDate');
 
 
 // Route::get('/addProperty', function () {

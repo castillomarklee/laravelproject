@@ -28,27 +28,22 @@ class HomeController extends Controller
      */
     public function index()
     {
+        $schedule = DB::table('properties')
+            ->join('propertydate', 'properties.uid', '=', 'propertydate.property_uid')
+            ->select('properties.*', 'propertydate.*')
+            ->get();
 
-        // $schedules = DB::table('properties')
-        //     ->join('propertydate', 'properties.uid', '=', 'propertydate.property_uid')
-        //     ->select('properties.*', 'propertydate.*')
-        //     ->get();
-        
-        // $event_list = [];
+        return view('home')->with('scheduledate', response()
+            ->json($schedule) );
+    }
 
-        // foreach ($schedules as $key => $schedule) {
-        //     $event_list[] = Calendar::event(
+    public function getPropertiesDate() {
+        $schedule = DB::table('properties')
+            ->join('propertydate', 'properties.uid', '=', 'propertydate.property_uid')
+            ->select('properties.*', 'propertydate.*')
+            ->get();
 
-        //         $schedule->social_medianame,
-        //         true,
-        //         new \DateTime($schedule->start_date),
-        //         new \DateTime($schedule->end_date)
-        //     );
-
-        //     $calendar_details = Calendar::addEvents($event_list);
-        // }
-
-        return view('home');
+        return response()->json($schedule);
     }
 
     
